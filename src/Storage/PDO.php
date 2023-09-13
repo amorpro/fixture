@@ -66,14 +66,15 @@ class PDO extends StorageContract
      */
     public function getAnyOne($tableName)
     {
-        $sql = "SELECT * FROM $tableName LIMIT 1";
+        $stmt = $this->db->prepare("SELECT * FROM $tableName order by 1 DESC LIMIT 1");
+        $stmt->execute();
 
-        return $this->db->prepare($sql)->fetch();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
     public function getPrimaryKeys(string $table): array
     {
-      return $this->_getTableSchema($table)['primary_keys'];
+        return $this->_getTableSchema($table)['primary_keys'];
     }
 
     public function getSchema($table)
