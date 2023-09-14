@@ -38,7 +38,7 @@ class PDO extends StorageContract
         $values = array_values($dataToInsert);
 
         $sql = 'INSERT INTO ' . $table
-            . (!empty($columns) ? ' (' . implode(', ', $columns) . ')' : '')
+            . (!empty($columns) ? ' (`' . implode('`, `', $columns) . '`)' : '')
             . (!empty($columnsForBind) ? ' VALUES (' . implode(', ', $columnsForBind) . ')' : $values);
 
         $stmt = $this->db->prepare($sql);
