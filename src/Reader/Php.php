@@ -60,6 +60,12 @@ class Php extends Base
     {
         $fixtureFilePath = $this->_getFixtureFilePath($fixtureKey);
 
+        if (!file_exists($fixtureFilePath)) {
+            throw new \RuntimeException(
+                'Fixture ' . $fixtureKey->getFullTableName() . ' file ' . $fixtureFilePath . ' does not exists'
+            );
+        }
+
         // Mute code
         if ($muteCode) {
             $fixtureFileContent = file_get_contents($fixtureFilePath);
