@@ -2,6 +2,7 @@
 
 namespace Fixturify\Reader;
 
+use Fixturify\FixtureField\Name;
 use Fixturify\FixtureKey\DatabaseFixtureKey;
 use InvalidArgumentException;
 
@@ -27,7 +28,13 @@ class Php extends Base
             throw new InvalidArgumentException('Fixture ' . $fixtureKey . ' is not found');
         }
 
-        return $allFixtures[$fixtureKey->getUnique()];
+        $fixture = $allFixtures[$fixtureKey->getUnique()];
+
+        if(!isset($fixture[Name::DEPENDENCIES])){
+            $fixture[Name::DEPENDENCIES] = [];
+        }
+
+        return $fixture;
     }
 
     protected function _getFixtureFilePath(DatabaseFixtureKey $fixtureKey): string
