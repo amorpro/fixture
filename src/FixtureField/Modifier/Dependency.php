@@ -19,7 +19,7 @@ class Dependency extends Base
     {
         $dependencyFixtureKey = new DatabaseFixtureKey($value->getKey());
         try {
-            $dependencyFixture = $this->fixtureService->loadFixture($dependencyFixtureKey);
+            $dependencyFixture = $this->fixtureService->loadFixture($dependencyFixtureKey, $value->getOverrides());
         } catch (InvalidArgumentException $e) {
             throw new InvalidArgumentException(
                 $e->getMessage() . ' called from fixture ' . $fixtureKey, 0,
