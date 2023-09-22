@@ -8,7 +8,7 @@ use InvalidArgumentException;
 
 class Php extends Base
 {
-    public const MUTE_FUNCTIONS = ['dependency', 'date'];
+    public const MUTE_FUNCTIONS = ['dependency', 'date', 'implode', 'strtotime'];
     public const MUTE_VARIABLES = ['faker'];
 
     /**
