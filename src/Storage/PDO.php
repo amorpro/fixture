@@ -26,6 +26,9 @@ class PDO extends StorageContract
     {
         // remove auto increment columns from teh insert
         $autoIncrementColumns = $this->_getTableSchema($table)['auto_increment_keys'];
+        if(!$autoIncrementColumns){
+            $autoIncrementColumns = [];
+        }
         foreach(array_keys($dataToInsert) as $column){
             if (!$dataToInsert[$column] && in_array($column, $autoIncrementColumns) ) {
                 unset($dataToInsert[$column]);
